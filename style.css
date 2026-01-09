@@ -1,0 +1,100 @@
+/* style.css */
+
+/* 1. Import Font (Tùy chọn, dùng font Inter cho hiện đại) */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+body {
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased; /* Giúp chữ mượt hơn trên Mac/iOS */
+}
+
+/* 2. Tùy chỉnh thanh cuộn (Custom Scrollbar) 
+   Tailwind mặc định không có cái này, giúp Kanban board đẹp hơn */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 3. Kanban Column Styling */
+/* Đảm bảo cột luôn có chiều cao tối thiểu và có thanh cuộn riêng nếu quá nhiều task */
+.kanban-col {
+  min-height: 500px;
+  max-height: calc(100vh - 180px); /* Trừ đi chiều cao header */
+  overflow-y: auto;
+  padding-right: 4px; /* Tránh nội dung đè lên thanh cuộn */
+}
+
+/* 4. Task Card Animation & Hover Effect */
+/* Class này sẽ được dùng cho các thẻ Task (cần thêm vào JS render) */
+.task-card {
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  position: relative;
+  background-color: white;
+}
+
+.task-card:hover {
+  transform: translateY(-3px); /* Nhấc nhẹ thẻ lên khi hover */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: #3b82f6; /* Đổi màu viền nhẹ sang xanh (nếu muốn) */
+}
+
+/* 5. Subtask Styles */
+.subtask-item {
+  transition: opacity 0.2s;
+}
+
+.subtask-item input[type="checkbox"] {
+  accent-color: #16a34a; /* Màu xanh lá khi tick checkbox */
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Hiệu ứng gạch ngang mượt mà */
+.line-through {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* 6. Loading Spinner (Dùng khi đang load data từ Firebase) */
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 7. Modal Animation */
+#projectModal,
+#taskModal {
+  backdrop-filter: blur(2px); /* Làm mờ nền đằng sau modal */
+  transition: opacity 0.3s ease;
+}

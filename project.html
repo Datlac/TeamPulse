@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TeamPulse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .kanban-col {
+        min-height: 500px;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 h-screen flex flex-col">
+    <header class="bg-white shadow p-4 flex justify-between items-center">
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="text-blue-500 hover:underline"
+          >&larr; Back</a
+        >
+        <h1 id="projectTitle" class="text-xl font-bold">Loading...</h1>
+      </div>
+      <button
+        id="newTaskBtn"
+        class="bg-green-600 text-white px-4 py-2 rounded hidden"
+      >
+        + Add Task
+      </button>
+    </header>
+
+    <main class="flex-1 overflow-x-auto p-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
+        <div class="bg-gray-200 p-4 rounded">
+          <h2 class="font-bold mb-4 text-gray-700">TO DO</h2>
+          <div id="col-todo" class="kanban-col space-y-3"></div>
+        </div>
+        <div class="bg-blue-100 p-4 rounded">
+          <h2 class="font-bold mb-4 text-blue-700">IN PROGRESS</h2>
+          <div id="col-inprogress" class="kanban-col space-y-3"></div>
+        </div>
+        <div class="bg-green-100 p-4 rounded">
+          <h2 class="font-bold mb-4 text-green-700">DONE</h2>
+          <div id="col-done" class="kanban-col space-y-3"></div>
+        </div>
+      </div>
+    </main>
+
+    <div
+      id="taskModal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50"
+    >
+      <div class="bg-white p-6 rounded w-[600px] max-h-[90vh] overflow-auto">
+        <h3 class="text-xl font-bold mb-4">Add New Task</h3>
+        <form id="createTaskForm">
+          <input
+            type="text"
+            id="taskName"
+            placeholder="Task Name"
+            class="w-full border p-2 mb-2"
+            required
+          />
+          <textarea
+            id="taskDesc"
+            placeholder="Description"
+            class="w-full border p-2 mb-2"
+          ></textarea>
+          <div class="flex gap-2 mb-2">
+            <input
+              type="date"
+              id="taskStart"
+              class="w-full border p-2"
+              required
+            />
+            <input
+              type="date"
+              id="taskEnd"
+              class="w-full border p-2"
+              required
+            />
+          </div>
+          <select id="taskPriority" class="w-full border p-2 mb-4">
+            <option value="low">Low Priority</option>
+            <option value="medium" selected>Medium Priority</option>
+            <option value="high">High Priority</option>
+          </select>
+
+          <div class="border-t pt-2">
+            <label class="block font-bold mb-2"
+              >Sub-tasks (Assign & Describe)</label
+            >
+            <div id="subtaskList" class="space-y-2 mb-2"></div>
+            <button
+              type="button"
+              id="addSubtaskLineBtn"
+              class="text-sm text-blue-600"
+            >
+              + Add Subtask Line
+            </button>
+          </div>
+
+          <div class="flex justify-end gap-2 mt-4">
+            <button
+              type="button"
+              id="closeTaskModal"
+              class="px-4 py-2 border rounded"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-green-600 text-white px-4 py-2 rounded"
+            >
+              Create Task
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="./js/project-detail.js"></script>
+  </body>
+</html>
